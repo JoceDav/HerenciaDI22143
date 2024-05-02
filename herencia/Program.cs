@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Linq;
+using System.Security.Cryptography.X509Certificates;
 using System.Threading.Tasks;
 using System.Windows.Forms;
 
@@ -14,7 +15,7 @@ namespace herencia
         //Modificador    tipo de dato       nombre
         protected           int             valor1;
         protected           int             valor2;
-        protected           int             Resultado;
+        protected           int             resultado;
         //Atributos clase operacion
         /*Los metos que se ponen a continuacion son las funciones de obtener el valor de la caja de texto y guardarlo en la memoria
          * dentro de la variable indicada*/
@@ -35,8 +36,8 @@ namespace herencia
 
         public int Resultado //Caja de memoria 3
         {
-            get { return Resultado; } //Vamos por el valor de la caja de texto 
-            set { Resultado = value; } //Lo guarda en la memoria
+            get { return resultado; } //Vamos por el valor de la caja de texto 
+            set { resultado = value; } //Lo guarda en la memoria
         }
 
     }
@@ -52,7 +53,7 @@ namespace herencia
         public int operar(int v1, int v2)
         {
             valor1 = v1; //Accesamos al contructor de operacion 
-            valor1 = v2;
+            valor2 = v2;
             return Resultado = valor1 + valor2;
         }
 
@@ -67,7 +68,7 @@ namespace herencia
         public int operar(int v1, int v2)
         {
             valor1 = v1; //Accesamos al contructor de operacion 
-            valor1 = v2;
+            valor2= v2;
             return Resultado = valor1 - valor2;
         }
     }
@@ -81,11 +82,27 @@ namespace herencia
         public int operar(int v1, int v2)
         {
             valor1 = v1; //Accesamos al contructor de operacion 
-            valor1 = v2;
+            valor2 = v2;
             return Resultado = valor1 * valor2;
         }
     }
-    static class Program
+    class dividir : Operacion //los : nos dan permisos de usar
+                              //lo que tiene operacion
+    {
+        public double Operar(int num1, int num2)
+        {
+            // Verificar si el divisor es cero para evitar una división por cero
+            if (num2 == 0)
+            {
+                throw new ArgumentException("No se puede dividir entre cero.");
+            }
+
+            // Realizar la división y devolver el resultado
+            return (double)num1 / num2;
+        }
+    }
+
+        static class Program
     {
         /// <summary>
         /// Punto de entrada principal para la aplicación.
